@@ -23,4 +23,4 @@ hs_err_pid*
 
 #out folder and .idea
 .idea/
-out/
+reports/
