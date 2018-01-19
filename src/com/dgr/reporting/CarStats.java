@@ -1,4 +1,4 @@
-package com.dgr.reports;
+package com.dgr.reporting;
 
 import com.dgr.Parking;
 import com.dgr.interfaces.Observer;

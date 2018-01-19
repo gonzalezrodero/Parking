@@ -1,4 +1,4 @@
-package com.dgr.reports;
+package com.dgr.reporting;
 
 import com.dgr.Parking;
 import com.dgr.interfaces.Observer;
@@ -9,24 +9,32 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RejectedVehiclesStats implements Observer, Report {
+public class WholeStats implements Observer, Report {
     private List<Vehicle> rejectedVehicles = new ArrayList<>();
+    private List<Vehicle> acceptedVehicles = new ArrayList<>();
 
-    RejectedVehiclesStats(Parking parking){
+    WholeStats(Parking parking){
         parking.registerObserver(this);
     }
 
     @Override
     public void update(Vehicle vehicle) {
-        if (vehicle.isRejected){
+        if(vehicle.isRejected){
             rejectedVehicles.add(vehicle);
+        } else {
+            acceptedVehicles.add(vehicle);
         }
     }
 
     @Override
     public void reportToFile(File report) {
         try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(report.getAbsoluteFile(), true)))){
-            out.println("Number of vehicles rejected: " + rejectedVehicles.size());
+            for(Vehicle v : acceptedVehicles){
+                out.println(v.reportAccepted());
+            }
+            for(Vehicle v : rejectedVehicles){
+                out.println(v.reportRejected());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

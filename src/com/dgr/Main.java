@@ -1,7 +1,7 @@
 package com.dgr;
 
 import com.dgr.factories.VehicleFactory;
-import com.dgr.reports.ReportPrinter;
+import com.dgr.reporting.ReportPrinter;
 import com.dgr.vehicles.Vehicle;
 
 import java.io.File;
